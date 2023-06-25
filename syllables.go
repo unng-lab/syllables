@@ -137,9 +137,6 @@ func snrt(r rune) int {
 	return -1
 }
 
-func runesToString(runes ...rune) (outString string) {
-	for _, v := range runes {
-		outString += string(v)
-	}
-	return
+func runesToString(runes ...rune) string {
+	return string(runes)
 }

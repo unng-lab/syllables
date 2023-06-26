@@ -94,7 +94,10 @@ func Do(word string) []string {
 			} else if isModifier(s.word[s.pos]) &&
 				len(s.res) > 0 &&
 				!(s.pos+2 <= len(s.word) &&
-					runesToString(s.word[s.pos-1], s.word[s.pos], s.word[s.pos+1], s.word[s.pos+2]) == "ться") {
+					s.word[s.pos-1] == 'т' &&
+					s.word[s.pos] == 'ь' &&
+					s.word[s.pos+1] == 'с' &&
+					s.word[s.pos+2] == 'я') {
 				if len(s.curSyl) == 1 {
 					s.curSyl = append(s.curSyl, s.word[s.pos])
 					s.res[len(s.res)-1] += string(s.curSyl)
@@ -137,6 +140,10 @@ func snrt(r rune) int {
 	return -1
 }
 
-func runesToString(runes ...rune) string {
-	return string(runes)
+func joinRunes(runes ...rune) string {
+	var sb strings.Builder
+	for _, r := range runes {
+		sb.WriteRune(r)
+	}
+	return sb.String()
 }
